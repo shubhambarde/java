@@ -1,0 +1,685 @@
+1.
+
+mysql> 	
+Query OK, 0 rows affected (0.37 sec)
+
+
+mysql> Create Table Books
+    -> (
+    ->  Book_No int,
+    ->  Book_Name varchar(30),
+    ->  Author_Name Varchar(30),
+    ->  Cost float,
+    -> Category varchar(30)
+    -> );
+Query OK, 0 rows affected (0.30 sec)
+
+
+mysql> Create Table Issue
+    -> (
+    -> Lib_Issue_Id int,
+    -> Book_No int,
+    -> Member_Id int,
+    -> Issue_date date,
+    -> Return_date date
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+2.
+
+mysql> desc Member;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Member_Id         | int(11)     | YES  |     | NULL    |       |
+| Member_Name       | varchar(30) | YES  |     | NULL    |       |
+| Member_Address    | varchar(50) | YES  |     | NULL    |       |
+| Acc_Open_Date     | date        | YES  |     | NULL    |       |
+| Membership_type   | varchar(20) | YES  |     | NULL    |       |
+| Fees_Paid         | int(11)     | YES  |     | NULL    |       |
+| Max_Books_Allowed | int(11)     | YES  |     | NULL    |       |
+| Penalty_Amount    | int(11)     | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.03 sec)
+
+mysql> desc Books;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Book_No     | int(11)     | YES  |     | NULL    |       |
+| Book_Name   | varchar(30) | YES  |     | NULL    |       |
+| Author_Name | varchar(30) | YES  |     | NULL    |       |
+| Cost        | float       | YES  |     | NULL    |       |
+| Category    | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> desc Issue;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| Lib_Issue_Id | int(11) | YES  |     | NULL    |       |
+| Book_No      | int(11) | YES  |     | NULL    |       |
+| Member_Id    | int(11) | YES  |     | NULL    |       |
+| Issue_date   | date    | YES  |     | NULL    |       |
+| Return_date  | date    | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+
+3.
+
+
+mysql> drop table Member;
+Query OK, 0 rows affected (0.03 sec)
+
+
+4.
+
+
+CREATE TABLE Member
+     (
+      Member_Id Int primary key,
+      Member_Name Varchar(30),
+      Member_Address Varchar(50),
+      Acc_Open_Date Date,
+      Membership_type Varchar(20),
+      Fees_Paid int,
+      Max_Books_Allowed int,
+      Penalty_Amount int
+     );
+Query OK, 0 rows affected (0.08 sec)
+
+5.
+
+mysql> ALTER TABLE Member MODIFY Member_Name VARCHAR(50);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Member;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Member_Id         | int(11)     | NO   | PRI | NULL    |       |
+| Member_Name       | varchar(50) | YES  |     | NULL    |       |
+| Member_Address    | varchar(50) | YES  |     | NULL    |       |
+| Acc_Open_Date     | date        | YES  |     | NULL    |       |
+| Membership_type   | varchar(20) | YES  |     | NULL    |       |
+| Fees_Paid         | int(11)     | YES  |     | NULL    |       |
+| Max_Books_Allowed | int(11)     | YES  |     | NULL    |       |
+| Penalty_Amount    | int(11)     | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+
+6.
+
+mysql> ALTER TABLE Issue ADD Referece VARCHAR(30);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC iSSUE;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Lib_Issue_Id | int(11)     | YES  |     | NULL    |       |
+| Book_No      | int(11)     | YES  |     | NULL    |       |
+| Member_Id    | int(11)     | YES  |     | NULL    |       |
+| Issue_date   | date        | YES  |     | NULL    |       |
+| Return_date  | date        | YES  |     | NULL    |       |
+| Referece     | varchar(30) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+
+7.
+
+
+mysql> ALTER TABLE Issue DROP COLUMN Referece;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Issue;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| Lib_Issue_Id | int(11) | YES  |     | NULL    |       |
+| Book_No      | int(11) | YES  |     | NULL    |       |
+| Member_Id    | int(11) | YES  |     | NULL    |       |
+| Issue_date   | date    | YES  |     | NULL    |       |
+| Return_date  | date    | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+8.
+
+mysql> RENAME TABLE Issue TO Lib_Issue;
+Query OK, 0 rows affected (0.05 sec)
+
+
+9.
+
+mysql> INSERT INTO Member
+    -> VALUES(1,'Richa Sharma','Pune','10/12/05','Lifetime',25000,5,50);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Member
+    ->  VALUES(2,'Garima Sen','Pune','26/8/17','Annual',10000,3,NULL);
+Query OK, 1 row affected (0.01 sec)
+
+
+
+
+10.
+
+mysql> INSERT INTO Member
+    -> VALUES(3,'Deepak Rao','Hyderabad','20/4/12','Half-Yearly',15000,10,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Member
+    -> VALUES(4,'Rohit saini','Nagpur','28/8/17','Annual',11000,6,40);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Member
+    -> VALUES(5,'Shubh Kale','Pune','14/4/13','Lifetime',18000,9,10);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Member
+    -> VALUES(6,'Sagar Ganer','Mumbai','17/2/10','Quarterly',7000,2,70);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Member
+    -> VALUES(7,'Amit Patil','Satara','2/9/14','Annual',13000,4,NULL);
+Query OK, 1 row affected (0.00 sec)
+
+
+11.
+
+
+mysql> ALTER TABLE Member MODIFY Member_Name VARCHAR(20);
+Query OK, 2 rows affected (0.45 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> DESC Member;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Member_Id         | int(11)     | NO   | PRI | NULL    |       |
+| Member_Name       | varchar(20) | YES  |     | NULL    |       |
+| Member_Address    | varchar(50) | YES  |     | NULL    |       |
+| Acc_Open_Date     | date        | YES  |     | NULL    |       |
+| Membership_type   | varchar(20) | YES  |     | NULL    |       |
+| Fees_Paid         | int(11)     | YES  |     | NULL    |       |
+| Max_Books_Allowed | int(11)     | YES  |     | NULL    |       |
+| Penalty_Amount    | int(11)     | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+
+12.
+
+
+mysql> INSERT INTO Member
+    -> VALUES(8,'Sumit Jain','Nashik','24/1/06','Lifetime',11320,110,34);
+Query OK, 1 row affected (0.02 sec)
+
+13.
+
+mysql> create table Member101 as select * from Member;
+Query OK, 8 rows affected (0.27 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from Member101;
++-----------+--------------+----------------+---------------+-----------------+
+----------+-------------------+----------------+
+| Member_Id | Member_Name  | Member_Address | Acc_Open_Date | Membership_type |
+Fees_Paid | Max_Books_Allowed | Penalty_Amount |
++-----------+--------------+----------------+---------------+-----------------+
+----------+-------------------+----------------+
+|         1 | Richa Sharma | Pune           | 2010-12-05    | Lifetime        |
+    25000 |                 5 |             50 |
+|         2 | Garima Sen   | Pune           | 2026-08-17    | Annual          |
+    10000 |                 3 |            100 |
+|         3 | Deepak Rao   | Hyderabad      | 2020-04-12    | Half-Yearly     |
+    15000 |                10 |             30 |
+|         4 | Rohit saini  | Nagpur         | 2028-08-17    | Annual          |
+    11000 |                 6 |             40 |
+|         5 | Shubh Kale   | Pune           | 2014-04-13    | Lifetime        |
+    18000 |                 9 |             10 |
+|         6 | Sagar Ganer  | Mumbai         | 2017-02-10    | Quarterly       |
+     7000 |                 2 |             70 |
+|         7 | Amit Patil   | Satara         | 0002-09-14    | Annual          |
+    13000 |                 4 |           NULL |
+|         8 | Sumit Jain   | Nashik         | 2024-01-06    | Lifetime        |
+    11320 |               110 |             34 |
++-----------+--------------+----------------+---------------+-----------------+
+----------+-------------------+----------------+
+
+
+14.
+
+mysql>
+mysql> alter table member add check(max_books_allowed < 100);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table member add check(penalty_amount < 1000);
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+15.
+
+
+mysql> DROP TABLES Books;
+Query OK, 0 rows affected (0.34 sec)
+
+16
+
+
+mysql> create table Books
+    -> (
+    ->  Book_No int primary key,
+    ->  Book_Name varchar(30) not null,
+    ->  Author varchar(30),
+    ->  Cost int,
+    ->  Category varchar(30) check(category in ('Science','Fiction','Database','
+RDBMS','Others')));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc Books;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Book_No   | int(11)     | NO   | PRI | NULL    |       |
+| Book_Name | varchar(30) | NO   |     | NULL    |       |
+| Author    | varchar(30) | YES  |     | NULL    |       |
+| Cost      | int(11)     | YES  |     | NULL    |       |
+| Category  | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+
+17.
+
+mysql> Insert into Books Values(101,'Let Us C','Deis Ritchie',450,'System');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into Books Values(102,'Oracle - Complete Ref','Loni',550,'Databas
+');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> Insert into Books Values(103,'Mastering SQL','Loni',250,'Database');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into Books Values(104,'PL SQL','Scott Urman',750,'Database');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Books;
++---------+-----------------------+--------------+------+----------+
+| Book_No | Book_Name             | Author       | Cost | Category |
++---------+-----------------------+--------------+------+----------+
+|     101 | Let Us C              | Deis Ritchie |  450 | System   |
+|     102 | Oracle - Complete Ref | Loni         |  550 | Database |
+|     103 | Mastering SQL         | Loni         |  250 | Database |
+|     104 | PL SQL                | Scott Urman  |  750 | Database |
++---------+-----------------------+--------------+------+----------+
+4 rows in set (0.00 sec)
+
+
+18
+
+
+mysql> Insert into Books Values(105,'Let us C++','Kanetkar',500,'C++');
+Query OK, 1 row affected (0.00 sec)
+
+19.
+
+mysql> Create table Book101 as select * from Books;
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> delete from Book101;
+Query OK, 5 rows affected (0.02 sec)
+
+
+20.
+
+mysql> insert into Book101 select * from Books;
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+21.
+
+22.
+
+mysql> select * from Books;
++---------+-----------------------+--------------+------+----------+
+| Book_No | Book_Name             | Author       | Cost | Category |
++---------+-----------------------+--------------+------+----------+
+|     101 | Let Us C              | Deis Ritchie |  450 | System   |
+|     102 | Oracle - Complete Ref | Loni         |  550 | Database |
+|     103 | Mastering SQL         | Loni         |  250 | Database |
+|     104 | PL SQL                | Scott Urman  |  750 | Database |
+|     105 | Let us C++            | Kanetkar     |  500 | C++      |
++---------+-----------------------+--------------+------+----------+
+5 rows in set (0.00 sec)
+
+
+23.
+
+mysql> Insert into Books values(106,'National Geographic','Adis Scott', 1000,'Sc
+ience');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from Books;
++---------+-----------------------+--------------+------+----------+
+| Book_No | Book_Name             | Author       | Cost | Category |
++---------+-----------------------+--------------+------+----------+
+|     101 | Let Us C              | Deis Ritchie |  450 | System   |
+|     102 | Oracle - Complete Ref | Loni         |  550 | Database |
+|     103 | Mastering SQL         | Loni         |  250 | Database |
+|     104 | PL SQL                | Scott Urman  |  750 | Database |
+|     105 | Let us C++            | Kanetkar     |  500 | C++      |
+|     106 | National Geographic   | Adis Scott   | 1000 | Science  |
++---------+-----------------------+--------------+------+----------+
+6 rows in set (0.00 sec)
+
+24.
+
+
+
+25.
+
+mysql> Update Books
+    -> set Cost = 300
+    -> where Book_No = 103;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Books;
++---------+---------------------+---------------+------+----------+
+| Book_No | Book_Name           | Author_Name   | Cost | Category |
++---------+---------------------+---------------+------+----------+
+|     101 | Let Us C            | Denis Ritchie |  450 | System   |
+|     102 | Oracle Complete Ref | Loni          |  550 | Database |
+|     103 | Mastering SQL       | Loni          |  300 | Databse  |
+|     104 | PL SQL REF          | Scott Urman   |  750 | Database |
+|     105 | Natinal Geographic  | Adis Scott    | 1000 | Science  |
++---------+---------------------+---------------+------+----------+
+5 rows in set (0.00 sec)
+
+
+
+26.
+
+
+mysql> Rename table Lib_Issue to Issue;
+Query OK, 0 rows affected (0.06 sec)
+
+
+27.
+
+
+mysql> drop table Issue;
+Query OK, 0 rows affected (0.03 sec)
+
+
+
+28.
+
+
+mysql> Create table Issue
+    -> (
+    ->  Lib_issue_Id int primary key,
+    ->  Book_No int,
+    ->  Member_Id int,
+    ->  Issue_Date date,
+    ->  Return_Date date,
+    ->  foreign key (Member_Id) references Member(Member_Id),
+    ->  foreign key (Book_No) references Books(Book_No));
+Query OK, 0 rows affected (0.08 sec)
+
+
+29.
+
+
+mysql> Insert into Issue
+    -> Values(7001,101,1,'10/12/06','15/1/12');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into Issue
+    -> Values(7002,102,2,'25/12/06','15/2/13');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into Issue
+    -> Values(7003,104,1,'15/01/06','15/3/14');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> Insert into Issue
+    -> Values(7004,101,1,'04/07/06','15/4/15');
+Query OK, 1 row affected (0.02 sec)
+mysql> Insert into Issue
+    -> Values(7005,104,2,'15/11/06','15/5/16');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into Issue
+    -> Values(7006,101,3,'18/02/06','15/6/17');
+Query OK, 1 row affected (0.02 sec)
+
+
+
+30.
+
+
+
+
+
+31.
+
+
+
+mysql> set foreign_key_checks = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+
+32.
+
+mysql> Insert into Issue
+    -> Values(7007,101,13,'18/02/06','15/6/17');
+Query OK, 1 row affected (0.01 sec)
+
+
+33.
+
+mysql> set foreign_key_checks = 1;
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+34.
+
+mysql> delete from Member where Member_Id = 1;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constrai
+nt fails (`organization`.`issue`, CONSTRAINT `issue_ibfk_1` FOREIGN KEY (`Member
+_Id`) REFERENCES `member` (`Member_Id`))
+
+36.
+
+mysql> update Issue
+    -> set return_date = '21-07-04'
+    -> where Lib_Issue_Id = 7004;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Issue
+    -> set return_date = '21-11-15'
+    -> where Lib_Issue_Id = 7005;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Issue;
++--------------+---------+-----------+------------+-------------+
+| Lib_issue_Id | Book_No | Member_Id | Issue_Date | Return_Date |
++--------------+---------+-----------+------------+-------------+
+|         7001 |     101 |         1 | 2010-12-06 | 2015-01-12  |
+|         7002 |     102 |         2 | 2025-12-06 | 2015-02-13  |
+|         7003 |     104 |         1 | 2015-01-06 | 2015-03-14  |
+|         7004 |     101 |         1 | 2004-07-06 | 2021-07-04  |
+|         7005 |     104 |         2 | 2015-11-06 | 2021-11-15  |
+|         7006 |     101 |         3 | 2018-02-06 | 2015-06-17  |
++--------------+---------+-----------+------------+-------------+
+6 rows in set (0.00 sec)
+
+37.
+
+
+    -> ^C
+mysql> Update Member
+    -> set Penalty_Amount = 100
+    -> where Member_Id = 2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+39.
+
+mysql> delete from Issue
+    -> where member_id = 1;
+Query OK, 3 rows affected (0.22 sec)
+
+mysql> select * from Issue;
++--------------+---------+-----------+------------+-------------+
+| Lib_issue_Id | Book_No | Member_Id | Issue_Date | Return_Date |
++--------------+---------+-----------+------------+-------------+
+|         7002 |     102 |         2 | 2025-12-06 | 2015-02-13  |
+|         7005 |     104 |         2 | 2015-11-06 | 2021-11-15  |
+|         7006 |     101 |         3 | 2018-02-06 | 2015-06-17  |
++--------------+---------+-----------+------------+-------------+
+
+40.
+
+mysql> delete from books where category Not in ('RDBMS','Database');
+Query OK, 3 rows affected (0.02 sec)
+
+
+
+43.
+
+mysql> drop table Member101;
+Query OK, 0 rows affected (0.03 sec)
+
+44.
+
+
+mysql> drop table Book101;
+Query OK, 0 rows affected (0.03 sec)
+
+
+45.
+
+mysql> select * from Member;
++-----------+--------------+----------------+---------------+-----------------+-
+----------+-------------------+----------------+
+| Member_Id | Member_Name  | Member_Address | Acc_Open_Date | Membership_type |
+Fees_Paid | Max_Books_Allowed | Penalty_Amount |
++-----------+--------------+----------------+---------------+-----------------+-
+----------+-------------------+----------------+
+|         1 | Richa Sharma | Pune           | 2010-12-05    | Lifetime        |
+    25000 |                 5 |             50 |
+|         2 | Garima Sen   | Pune           | 2026-08-17    | Annual          |
+    10000 |                 3 |            100 |
+|         3 | Deepak Rao   | Hyderabad      | 2020-04-12    | Half-Yearly     |
+    15000 |                10 |             30 |
+|         4 | Rohit saini  | Nagpur         | 2028-08-17    | Annual          |
+    11000 |                 6 |             40 |
+|         5 | Shubh Kale   | Pune           | 2014-04-13    | Lifetime        |
+    18000 |                 9 |             10 |
+|         6 | Sagar Ganer  | Mumbai         | 2017-02-10    | Quarterly       |
+     7000 |                 2 |             70 |
+|         7 | Amit Patil   | Satara         | 0002-09-14    | Annual          |
+    13000 |                 4 |           NULL |
+|         8 | Sumit Jain   | Nashik         | 2024-01-06    | Lifetime        |
+    11320 |               110 |             34 |
++-----------+--------------+----------------+---------------+-----------------+-
+----------+-------------------+----------------+
+8 rows in set (0.00 sec)
+
+
+
+mysql> desc Member;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Member_Id         | int(11)     | NO   | PRI | NULL    |       |
+| Member_Name       | varchar(20) | YES  |     | NULL    |       |
+| Member_Address    | varchar(50) | YES  |     | NULL    |       |
+| Acc_Open_Date     | date        | YES  |     | NULL    |       |
+| Membership_type   | varchar(20) | YES  |     | NULL    |       |
+| Fees_Paid         | int(11)     | YES  |     | NULL    |       |
+| Max_Books_Allowed | int(11)     | YES  |     | NULL    |       |
+| Penalty_Amount    | int(11)     | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+mysql> select * from Issue;
++--------------+---------+-----------+------------+-------------+
+| Lib_issue_Id | Book_No | Member_Id | Issue_Date | Return_Date |
++--------------+---------+-----------+------------+-------------+
+|         7002 |     102 |         2 | 2025-12-06 | 2015-02-13  |
+|         7005 |     104 |         2 | 2015-11-06 | 2021-11-15  |
+|         7006 |     101 |         3 | 2018-02-06 | 2015-06-17  |
++--------------+---------+-----------+------------+-------------+
+
+mysql> desc Issue;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| Lib_issue_Id | int(11) | NO   | PRI | NULL    |       |
+| Book_No      | int(11) | YES  | MUL | NULL    |       |
+| Member_Id    | int(11) | YES  | MUL | NULL    |       |
+| Issue_Date   | date    | YES  |     | NULL    |       |
+| Return_Date  | date    | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> select * from Books;
++---------+-----------------------+--------------+------+----------+
+| Book_No | Book_Name             | Author       | Cost | Category |
++---------+-----------------------+--------------+------+----------+
+|     101 | Let Us C              | Deis Ritchie |  450 | System   |
+|     102 | Oracle - Complete Ref | Loni         |  550 | Database |
+|     103 | Mastering SQL         | Loni         |  250 | Database |
+|     104 | PL SQL                | Scott Urman  |  750 | Database |
+|     105 | Let us C++            | Kanetkar     |  500 | C++      |
+|     106 | National Geographic   | Adis Scott   | 1000 | Science  |
++---------+-----------------------+--------------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> desc books;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Book_No   | int(11)     | NO   | PRI | NULL    |       |
+| Book_Name | varchar(30) | NO   |     | NULL    |       |
+| Author    | varchar(30) | YES  |     | NULL    |       |
+| Cost      | int(11)     | YES  |     | NULL    |       |
+| Category  | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
